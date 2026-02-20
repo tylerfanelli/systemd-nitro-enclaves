@@ -1,0 +1,15 @@
+[Unit]
+Description=Nitro Enclaves Resource Allocator
+DefaultDependencies=no
+After=sysinit.target
+
+[Service]
+Type=oneshot
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=nitro-enclaves-allocator
+ExecStart=/sbin/nitro-enclaves-allocator
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
