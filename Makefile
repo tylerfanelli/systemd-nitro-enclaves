@@ -1,13 +1,13 @@
-prefix ?= $(PREFIX)/usr
+prefix_usr ?= $(PREFIX)/usr
 
-bindir ?= $(prefix)/bin
-sysconfdir ?= $(prefix)/etc
-libdir ?= $(prefix)/lib
+bindir ?= $(prefix_usr)/bin
+sysconfdir ?= $(PREFIX)/etc
+libdir ?= $(prefix_usr)/lib
 unitdir ?= $(libdir)/systemd/system
 
-BIN_DIR := $(DESTDIR)$(bindir)
-SYS_CONF_DIR := $(DESTDIR)$(sysconfdir)/nitro_enclaves
-UNIT_DIR := $(DESTDIR)$(unitdir)
+BIN_DIR := $(bindir)
+SYS_CONF_DIR := $(sysconfdir)/nitro_enclaves
+UNIT_DIR := $(unitdir)
 
 .PHONY: files dirs sys_conf_install sys_conf_uninstall unitdir_install unitdir_uninstall bindir_install bindir_uninstall install uninstall clean
 
@@ -22,12 +22,14 @@ sys_conf_uninstall:
 	rm -rf $(SYS_CONF_DIR)
 
 unitdir_install:
+	mkdir -p $(UNIT_DIR)
 	cp -a nitro-enclaves-allocator.service $(UNIT_DIR)
 
 unitdir_uninstall:
 	rm -f $(UNIT_DIR)/nitro-enclaves-allocator.service
 
 bindir_install:
+	mkdir -p $(BIN_DIR)
 	cp nitro-cli-config $(BIN_DIR)
 	cp nitro-enclaves-allocator $(BIN_DIR)
 
