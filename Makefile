@@ -30,11 +30,9 @@ unitdir_uninstall:
 
 bindir_install:
 	mkdir -p $(BIN_DIR)
-	cp nitro-cli-config $(BIN_DIR)
 	cp nitro-enclaves-allocator $(BIN_DIR)
 
 bindir_uninstall:
-	rm -f $(BIN_DIR)/nitro-cli-config
 	rm -f $(BIN_DIR)/nitro-enclaves-allocator
 
 install: sys_conf_install unitdir_install bindir_install
