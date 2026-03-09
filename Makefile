@@ -1,15 +1,15 @@
 prefix_usr ?= $(PREFIX)/usr
 
-bindir ?= $(prefix_usr)/bin
+libexecdir ?= $(prefix_usr)/libexec
 sysconfdir ?= $(PREFIX)/etc
 libdir ?= $(prefix_usr)/lib
 unitdir ?= $(libdir)/systemd/system
 
-BIN_DIR := $(bindir)
+LIBEXEC_DIR := $(libexecdir)
 SYS_CONF_DIR := $(sysconfdir)/nitro_enclaves
 UNIT_DIR := $(unitdir)
 
-.PHONY: files dirs sys_conf_install sys_conf_uninstall unitdir_install unitdir_uninstall bindir_install bindir_uninstall install uninstall clean
+.PHONY: files dirs sys_conf_install sys_conf_uninstall unitdir_install unitdir_uninstall libexecdir_install libexecdir_uninstall install uninstall clean
 
 $(SYS_CONF_DIR):
 	mkdir -p $@
@@ -28,15 +28,15 @@ unitdir_install:
 unitdir_uninstall:
 	rm -f $(UNIT_DIR)/nitro-enclaves-allocator.service
 
-bindir_install:
-	mkdir -p $(BIN_DIR)
-	cp nitro-enclaves-allocator $(BIN_DIR)
+libexecdir_install:
+	mkdir -p $(LIBEXEC_DIR)
+	cp nitro-enclaves-allocator $(LIBEXEC_DIR)
 
-bindir_uninstall:
-	rm -f $(BIN_DIR)/nitro-enclaves-allocator
+libexecdir_uninstall:
+	rm -f $(LIBEXEC_DIR)/nitro-enclaves-allocator
 
-install: sys_conf_install unitdir_install bindir_install
+install: sys_conf_install unitdir_install libexecdir_install
 
-uninstall: sys_conf_uninstall unitdir_uninstall bindir_uninstall
+uninstall: sys_conf_uninstall unitdir_uninstall libexecdir_uninstall
 
 clean: uninstall
