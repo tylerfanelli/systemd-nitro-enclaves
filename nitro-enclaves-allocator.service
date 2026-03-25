@@ -5,7 +5,7 @@ After=sysinit.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/libexec/nitro-enclaves-allocator
+ExecStart=/bin/bash /usr/libexec/nitro-enclaves-allocator
 RemainAfterExit=yes
 
 [Install]
